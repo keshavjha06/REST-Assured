@@ -21,9 +21,9 @@ public class AutomateGet {
     public void validate_get_status_code() {
         given().
                 baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
-        when().
+                when().
                 get("/workspaces").
-        then().
+                then().
                 log().all().
                 assertThat().
                 statusCode(200);
@@ -34,9 +34,9 @@ public class AutomateGet {
     public void validate_response_body() {
         given().
                 baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
-        when().
+                when().
                 get("/workspaces").
-        then().
+                then().
                 log().all().
                 assertThat().
                 statusCode(200).
@@ -51,9 +51,9 @@ public class AutomateGet {
     public void extract_response() {
         Response res = given().
                 baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
-        when().
+                when().
                 get("/workspaces").
-        then().
+                then().
                 assertThat().
                 statusCode(200).
                 extract().response();
@@ -65,13 +65,13 @@ public class AutomateGet {
     public void extract_single_value_response() {
         String name = given().
                 baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
-        when().
+                when().
                 get("/workspaces").
-        then().
+                then().
                 assertThat().
                 statusCode(200).
                 extract().response().path("workspaces[0].name");
-         System.out.println("workspace name = " + name);
+        System.out.println("workspace name = " + name);
         //System.out.println("workspace name = " + JsonPath.from(res).getString("workspaces[0].name"));
         // System.out.println("workspace name = " + jsonPath.getString("workspaces[0].name"));
         // System.out.println("workspace name = " + res.path("workspaces[0].name"));
@@ -82,15 +82,15 @@ public class AutomateGet {
     public void hamcrest_assert_on_extracted_response() {
         String name = given().
                 baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
-        when().
+                when().
                 get("/workspaces").
-        then().
+                then().
                 assertThat().
                 statusCode(200).
                 extract().response().path("workspaces[0].name");
         System.out.println("workspace name = " + name);
         //assertThat(name , equalTo("My Workspace1"));
-        Assert.assertEquals(name , "My Workspace2");
+        Assert.assertEquals(name, "My Workspace2");
         //System.out.println("workspace name = " + JsonPath.from(res).getString("workspaces[0].name"));
         // System.out.println("workspace name = " + jsonPath.getString("workspaces[0].name"));
         // System.out.println("workspace name = " + res.path("workspaces[0].name"));
@@ -102,9 +102,9 @@ public class AutomateGet {
         given().
                 baseUri("https://api.postman.com").
                 header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
-        when().
+                when().
                 get("/workspaces").
-        then().
+                then().
                 log().all().
                 assertThat().
                 statusCode(200).
