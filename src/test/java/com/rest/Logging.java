@@ -15,7 +15,7 @@ public class Logging {
     public void request_response_logging() {
         given().
                 baseUri("https://api.postman.com").
-                header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                header("X-Api-Key", Secrets.postmanApiKey()).
                 log().headers().
                 when().
                 get("/workspaces").
@@ -30,7 +30,7 @@ public class Logging {
     public void log_only_if_error() {
         given().
                 baseUri("https://api.postman.com").
-                header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                header("X-Api-Key", Secrets.postmanApiKey()).
                 log().all().
                 when().
                 get("/workspaces").
@@ -45,7 +45,7 @@ public class Logging {
     public void log_only_if_validation_fails() {
         given().
                 baseUri("https://api.postman.com").
-                header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                header("X-Api-Key", Secrets.postmanApiKey()).
                 /* we can use config method instead of using ifValidationsFails() twice for request and response*/
                         config(config.logConfig(LogConfig.logConfig().enableLoggingOfRequestAndResponseIfValidationFails())).
                 //            log().ifValidationFails().
@@ -65,7 +65,7 @@ public class Logging {
         headers.add("Accept");
         given().
                 baseUri("https://api.postman.com").
-                header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                header("X-Api-Key", Secrets.postmanApiKey()).
                 config(config.logConfig(LogConfig.logConfig().blacklistHeaders(headers))).
                 //config(config.logConfig(LogConfig.logConfig().blacklistHeader("X-Api-Key"))). - for blacklisting single header
                         log().all().

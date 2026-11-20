@@ -12,7 +12,7 @@ public class StaticImports {
     public void simple_test_case(){
         given().
                 baseUri("https://api.postman.com").
-                header("x-api-key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                header("x-api-key", Secrets.postmanApiKey()).
         when().
                 get("/workspaces").
         then().

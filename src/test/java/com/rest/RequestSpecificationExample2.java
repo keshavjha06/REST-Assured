@@ -22,10 +22,10 @@ public class RequestSpecificationExample2 {
     public void beforeClass() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
                 setBaseUri("https://api.postman.com").
-                addHeader("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                addHeader("X-Api-Key", Secrets.postmanApiKey()).
                 log(LogDetail.HEADERS);
 //        requestSpecBuilder.setBaseUri("https://api.postman.com");
-//        requestSpecBuilder.addHeader("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6");
+//        requestSpecBuilder.addHeader("X-Api-Key", Secrets.postmanApiKey());
 //        requestSpecBuilder.log(LogDetail.HEADERS);
         RestAssured.requestSpecification = requestSpecBuilder.build();
     }

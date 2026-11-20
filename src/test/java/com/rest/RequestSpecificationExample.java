@@ -19,7 +19,7 @@ public class RequestSpecificationExample {
     public void beforeClass() {
         requestSpecification = with(). /*with and given both are same*/
                 baseUri("https://api.postman.com").
-                header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                header("X-Api-Key", Secrets.postmanApiKey()).
                 log().all();
     }
 

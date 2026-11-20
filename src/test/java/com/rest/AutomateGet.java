@@ -20,7 +20,7 @@ public class AutomateGet {
     @Test
     public void validate_get_status_code() {
         given().
-                baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                baseUri("https://api.postman.com").header("X-Api-Key", Secrets.postmanApiKey()).
                 when().
                 get("/workspaces").
                 then().
@@ -33,7 +33,7 @@ public class AutomateGet {
     @Test
     public void validate_response_body() {
         given().
-                baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                baseUri("https://api.postman.com").header("X-Api-Key", Secrets.postmanApiKey()).
                 when().
                 get("/workspaces").
                 then().
@@ -50,7 +50,7 @@ public class AutomateGet {
     @Test
     public void extract_response() {
         Response res = given().
-                baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                baseUri("https://api.postman.com").header("X-Api-Key", Secrets.postmanApiKey()).
                 when().
                 get("/workspaces").
                 then().
@@ -64,7 +64,7 @@ public class AutomateGet {
     @Test
     public void extract_single_value_response() {
         String name = given().
-                baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                baseUri("https://api.postman.com").header("X-Api-Key", Secrets.postmanApiKey()).
                 when().
                 get("/workspaces").
                 then().
@@ -81,7 +81,7 @@ public class AutomateGet {
     @Test
     public void hamcrest_assert_on_extracted_response() {
         String name = given().
-                baseUri("https://api.postman.com").header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                baseUri("https://api.postman.com").header("X-Api-Key", Secrets.postmanApiKey()).
                 when().
                 get("/workspaces").
                 then().
@@ -101,7 +101,7 @@ public class AutomateGet {
     public void validate_response_body_hamcrest_learnings() {
         given().
                 baseUri("https://api.postman.com").
-                header("X-Api-Key", "PMAK-6219be88ab339d257edc34ca-6d70c8591fd210658c3286c3386927c9a6").
+                header("X-Api-Key", Secrets.postmanApiKey()).
                 when().
                 get("/workspaces").
                 then().

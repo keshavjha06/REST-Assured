@@ -1,5 +1,6 @@
 package com.rest.google.oauth2;
 
+import com.rest.Secrets;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -17,10 +18,13 @@ import static io.restassured.RestAssured.given;
 public class GmailApi {
     RequestSpecification requestSpecification;
     ResponseSpecification responseSpecification;
-    String access_token = "ya29.A0ARrdaM_Ap5BXAzDDt3GXscLtbR_NB9IEyMXsJT6w73xd3eo2N1KQFerPpXXP3Ois4IcGy1xHO_-r2YMPSqR3HzHQYXsQz1mcntMpIBM6fl75v0T891rrYBbyP72-ijIYhEv_Gm_kxpgWYT5JzfQfH7FVTfNdUQ";
+    String access_token;
+    String gmailUser;
 
     @BeforeClass
     public void beforeClass(){
+        access_token = Secrets.gmailAccessToken();
+        gmailUser = Secrets.gmailUser();
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder().
                 setBaseUri("https://gmail.googleapis.com").
                 addHeader("Authorization", "Bearer " + access_token).
@@ -42,7 +46,7 @@ public class GmailApi {
     public void getUserProfile(){
         given(requestSpecification).
                 basePath("/gmail/v1").
-                pathParam("userid", "christinarachelberg@gmail.com").
+                pathParam("userid", gmailUser).
         when().
                 get("/users/{userid}/profile").
         then().spec(responseSpecification);
@@ -50,8 +54,8 @@ public class GmailApi {
 
     @Test
     public void sendMessage(){
-        String msg = "From: christinarachelberg@gmail.com\n" +
-                "To: christinarachelberg@gmail.com\n" +
+        String msg = "From: " + gmailUser + "\n" +
+                "To: " + gmailUser + "\n" +
                 "Subject: Rest Assured Test Email\n" +
                 "\n" +
                 "Sending from Rest Assured";
@@ -63,7 +67,7 @@ public class GmailApi {
 
         given(requestSpecification).
                 basePath("/gmail/v1").
-                pathParam("userid", "christinarachelberg@gmail.com").
+                pathParam("userid", gmailUser).
                 body(payload).
         when().
                 post("/users/{userid}/messages/send").
@@ -74,7 +78,7 @@ public class GmailApi {
     public void list(){
         given(requestSpecification).
                 basePath("/gmail/v1").
-                pathParam("userid", "christinarachelberg@gmail.com").
+                pathParam("userid", gmailUser).
         when().
                 get("/users/{userid}/messages").
         then().spec(responseSpecification);
@@ -84,7 +88,7 @@ public class GmailApi {
     public void get(){
         given(requestSpecification).
                 basePath("/gmail/v1").
-                pathParam("userid", "christinarachelberg@gmail.com").
+                pathParam("userid", gmailUser).
                 when().
                 get("/users/{userid}/messages/17f78c0ce20d6022").
                 then().spec(responseSpecification);
@@ -94,7 +98,7 @@ public class GmailApi {
     public void delete(){
         given(requestSpecification).
                 basePath("/gmail/v1").
-                pathParam("userid", "christinarachelberg@gmail.com").
+                pathParam("userid", gmailUser).
         when().
                 delete("/users/{userid}/messages/17f78c0ce20d6022").
         then().spec(responseSpecification);
