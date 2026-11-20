@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.config.CsrfConfig.csrfConfig;
 import static org.hamcrest.Matchers.equalTo;
 
 public class FormAuthentication {
@@ -30,8 +31,8 @@ public class FormAuthentication {
     public void form_authentication_using_csrf_token(){
         SessionFilter filter = new SessionFilter();
         given().
-                auth().form("dan", "dan123", new FormAuthConfig("/signin", "txtUsername", "txtPassword").
-                        withAutoDetectionOfCsrf()).
+                auth().form("dan", "dan123", new FormAuthConfig("/signin", "txtUsername", "txtPassword")).
+                config(RestAssured.config().csrfConfig(csrfConfig().with().csrfTokenPath("/login"))).
                 filter(filter).
                 log().all().
         when().
@@ -59,8 +60,8 @@ public class FormAuthentication {
     public void form_authentication_using_csrf_token_cookie_example(){
         SessionFilter filter = new SessionFilter();
         given().
-                auth().form("dan", "dan123", new FormAuthConfig("/signin", "txtUsername", "txtPassword").
-                        withAutoDetectionOfCsrf()).
+                auth().form("dan", "dan123", new FormAuthConfig("/signin", "txtUsername", "txtPassword")).
+                config(RestAssured.config().csrfConfig(csrfConfig().with().csrfTokenPath("/login"))).
                 filter(filter).
                 log().all().
         when().
